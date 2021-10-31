@@ -1,4 +1,4 @@
-package com.gamifq.godgamer;
+package com.gamifiq.godgamer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.gamifq.godgamer;
+package com.gamifiq.godgamer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
