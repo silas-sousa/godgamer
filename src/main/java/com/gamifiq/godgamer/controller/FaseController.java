@@ -40,7 +40,7 @@ public class FaseController {
 	
 	@PutMapping("/fase")
     public Fase updateFase(@RequestBody Fase newFase) {
-
+		
         repository.findById(newFase.getId()).orElseThrow(() -> new RuntimeException("Registro não encontrado"));
         Fase updatedFase = repository.save(newFase);
         return updatedFase;
