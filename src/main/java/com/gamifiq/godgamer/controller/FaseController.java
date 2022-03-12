@@ -15,47 +15,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gamifiq.godgamer.model.Fase;
-import com.gamifiq.godgamer.repository.FaseRepository;
+import com.gamifiq.godgamer.services.FaseService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(path = "/api/v1")
 public class FaseController {
-	
+
 	@Autowired
-    FaseRepository repository;
-	
+	FaseService faseService;
+
 	@GetMapping("/fases")
-	public List<Fase> getFases(){
-		return repository.findAll();
+	public List<Fase> getFases() {
+		return faseService.getFases();
 	}
-	
+
 	@GetMapping("/fase/{id}")
-	public Fase getFases(@PathVariable(value = "id") Long id){
-		return repository.findById(id).orElseThrow(() -> new RuntimeException("Registro não encontrado"));
+	public Fase getFases(@PathVariable(value = "id") Long id) {
+		return faseService.getFases(id);
 	}
-	
+
 	@PostMapping("/fase")
-	public Fase getFases(@RequestBody Fase fase){
-		return repository.save(fase);
+	public Fase saveFases(@RequestBody Fase fase) {
+		return faseService.saveFases(fase);
 	}
-	
+
 	@PutMapping("/fase")
-    public Fase updateFase(@RequestBody Fase newFase) {
-		
-        repository.findById(newFase.getId()).orElseThrow(() -> new RuntimeException("Registro não encontrado"));
-        Fase updatedFase = repository.save(newFase);
-        return updatedFase;
-    }
+	public Fase updateFase(@RequestBody Fase newFase) {
+		return faseService.updateFase(newFase);
+	}
 
-    @DeleteMapping("/fase/{id}")
-    public ResponseEntity<?> deleteFase(@PathVariable(value = "id") Long id) {
-    	Fase fase = repository.findById(id).orElseThrow(() -> new RuntimeException("Registro não encontrado"));
+	@DeleteMapping("/fase/{id}")
+	public ResponseEntity<?> deleteFase(@PathVariable(value = "id") Long id) {
+		return faseService.deleteFase(id);
+	}
 
-    	repository.delete(fase);
-
-        return ResponseEntity.ok().build();
-    }
-	
-	
 }
