@@ -68,7 +68,7 @@ public class FaseIntegrationTest {
         // given
         String message = null;
         try {
-            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fase/1"))
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/fase/9000"))
                     .andExpect(status().isOk())
                     .andExpect(content().contentType("application/json"));
         } catch (Exception e) {
@@ -92,7 +92,7 @@ public class FaseIntegrationTest {
     void itShouldNotUpdate() throws Exception {
         // given
         String message = null;
-        fase.setId(Long.valueOf(1));
+        fase.setId(Long.valueOf(9000));
         try {
             MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/fase")
                     .contentType("application/json")
@@ -128,9 +128,8 @@ public class FaseIntegrationTest {
         // given
         String message = null;
         try {
-            mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/fase/1"))
-                    .andExpect(status().isOk())
-                    .andExpect(content().contentType("application/json"));
+            mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/fase/9000"))
+                    .andExpect(status().isOk());
         } catch (Exception e) {
             e.printStackTrace();
             message = e.getCause().getMessage();
@@ -142,7 +141,7 @@ public class FaseIntegrationTest {
     @Test
     void itShouldDeleteById() throws Exception {
         itShouldAdd();
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/fase/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/fase/"+fase.getId().toString()))
                 .andExpect(status().isOk());
 
     }

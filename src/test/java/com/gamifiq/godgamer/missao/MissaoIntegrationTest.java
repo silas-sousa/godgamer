@@ -77,7 +77,7 @@ public class MissaoIntegrationTest {
         // given
         String message = null;
         try {
-            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/missao/1"))
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/missao/9000"))
                     .andExpect(status().isOk())
                     .andExpect(content().contentType("application/json"));
         } catch (Exception e) {
@@ -124,7 +124,7 @@ public class MissaoIntegrationTest {
     void itShouldNotUpdate() throws Exception {
         // given
         String message = null;
-        missao.setId(Long.valueOf(1));
+        missao.setId(Long.valueOf(9000));
         try {
             MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/missao")
                     .contentType("application/json")
@@ -152,7 +152,6 @@ public class MissaoIntegrationTest {
                 .andExpect(content().contentType("application/json"))
                 .andReturn();
         System.out.println(mvcResult.getResponse().getContentAsString());
-
     }
 
     @Test
@@ -160,7 +159,7 @@ public class MissaoIntegrationTest {
         // given
         String message = null;
         try {
-            mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/missao/1"))
+            mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/missao/9000"))
                     .andExpect(status().isOk())
                     .andExpect(content().contentType("application/json"));
         } catch (Exception e) {
@@ -174,7 +173,7 @@ public class MissaoIntegrationTest {
     @Test
     void itShouldDeleteById() throws Exception {
         itShouldAdd();
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/missao/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/missao/"+missao.getId().toString()))
                 .andExpect(status().isOk());
 
     }
